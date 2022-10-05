@@ -209,6 +209,9 @@ func (q *queryCache) getQueryItem(k string, size uint64, expire int32) *QueryIte
 
 type CarbonserverListener struct {
 	helper.Stoppable
+	// placed at start for alignment
+	MaxInflightRequests uint64
+
 	cacheGet          func(key string) []points.Point
 	readTimeout       time.Duration
 	idleTimeout       time.Duration
@@ -267,7 +270,6 @@ type CarbonserverListener struct {
 
 	interfalInfoCallbacks map[string]func() map[string]interface{}
 
-	MaxInflightRequests          uint64
 	NoServiceWhenIndexIsNotReady bool
 }
 
